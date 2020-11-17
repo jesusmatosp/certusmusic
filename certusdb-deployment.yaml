@@ -16,13 +16,11 @@ spec:
   template:
     metadata:
       labels:
-        app: certus-music-db
-        version: "latest"
+        app: certus-db
     spec:
       containers:
-      - name: certus-music-db
-        image: mongo-db
-        imagePullPolicy: name
+      - name: certus-db
+        image: mongo
         ports:
          - name: certus-port-2
            containerPort: 27017
