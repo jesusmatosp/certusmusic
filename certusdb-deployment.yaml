@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: certus-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: certus-db
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  revisionHistoryLimit: 10
+  template:
+    metadata:
+      labels:
+        app: certus-music-db
+        version: "latest"
+    spec:
+      containers:
+      - name: certus-music-db
+        image: mongo-db
+        imagePullPolicy: name
+        ports:
+         - name: certus-port-2
+           containerPort: 27017
+           protocol: TCP 
