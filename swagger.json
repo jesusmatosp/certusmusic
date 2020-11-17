@@ -1,0 +1,315 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Certus Music API",
+      "description": "Certus Music Project Application API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:3800",
+    "basePath": "/api",
+    "tags": [
+      {
+        "name": "Music",
+        "description": "API for music in the system"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/song": {
+        "post": {
+          "tags": [
+            "Songs"
+          ],
+          "description": "Create new song in system",
+          "parameters": [
+            {
+              "name": "song",
+              "in": "body",
+              "description": "Song that we want to create",
+              "schema": {
+                "$ref": "#/definitions/Song"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "New song is created",
+              "schema": {
+                "$ref": "#/definitions/Song"
+              }
+            }
+          }
+        },
+        "get":{
+            "tags": [
+                "Songs"
+              ],
+              "summary": "Get all songs in system",
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "schema": {
+                    "$ref": "#/definitions/Songs"
+                  }
+                }
+              }
+        }
+      },
+      "/song/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of song that we want to find",
+            "type": "string"
+          }
+        ],
+        "get": {
+            "summary": "Get song with given ID",  
+            "tags": [
+                "Songs"
+            ],
+            "responses": {
+                "200": {
+                  "description": "Song is deleted",
+                  "schema": {
+                    "$ref": "#/definitions/Song"
+                  }
+                }
+              }  
+        },
+        "delete": {
+          "summary": "Delete song with given ID",
+          "tags": [
+            "Songs"
+          ],
+          "responses": {
+            "200": {
+              "description": "Song is deleted",
+              "schema": {
+                "$ref": "#/definitions/Song"
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update song with give ID",
+          "tags": [
+            "Songs"
+          ],
+          "parameters": [
+            {
+              "name": "song",
+              "in": "body",
+              "description": "Song with new values of properties",
+              "schema": {
+                "$ref": "#/definitions/Song"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Song is updated",
+              "schema": {
+                "$ref": "#/definitions/Song"
+              }
+            }
+          }
+        }
+      },
+      "/playlist": {
+        "post": {
+            "tags": [
+              "Playlist"
+            ],
+            "description": "Create new playlist in system",
+            "parameters": [
+              {
+                "name": "playlist",
+                "in": "body",
+                "description": "Playlist that we want to create",
+                "schema": {
+                  "$ref": "#/definitions/Playlist"
+                }
+              }
+            ],
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "New Playlist is created",
+                "schema": {
+                  "$ref": "#/definitions/Playlist"
+                }
+              }
+            }
+          },
+          "get":{
+            "tags": [
+                "Playlist"
+              ],
+              "summary": "Get all Playlist in system",
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "schema": {
+                    "$ref": "#/definitions/Playlists"
+                  }
+                }
+              }
+            }
+      },
+      "/playlist/{id}": {
+        "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID of playlist that we want to find",
+              "type": "string"
+            }
+          ],
+          "get": {
+              "summary": "Get playlist with given ID",  
+              "tags": [
+                  "Playlist"
+              ],
+              "responses": {
+                  "200": {
+                    "description": "Song is deleted",
+                    "schema": {
+                      "$ref": "#/definitions/Playlist"
+                    }
+                  }
+                }  
+          },
+          "delete": {
+            "summary": "Delete playlist with given ID",
+            "tags": [
+              "Playlist"
+            ],
+            "responses": {
+              "200": {
+                "description": "Playlist is deleted",
+                "schema": {
+                  "$ref": "#/definitions/Playlist"
+                }
+              }
+            }
+          },
+          "put": {
+            "summary": "Update Playlist with give ID",
+            "tags": [
+              "Playlist"
+            ],
+            "parameters": [
+              {
+                "name": "playlist",
+                "in": "body",
+                "description": "Playlist with new values of properties",
+                "schema": {
+                  "$ref": "#/definitions/Playlist"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Playlist is updated",
+                "schema": {
+                  "$ref": "#/definitions/Playlist"
+                }
+              }
+            }
+          }
+      }
+    },
+    "definitions": {
+      "Song": {
+        "required": [
+          "name",
+          "_id"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "description": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "year": {
+            "type": "number"
+          },
+          "url":{
+            "type": "string"
+          }
+        }
+      },
+      "Songs": {
+        "type": "array",
+        "$ref": "#/definitions/Song"
+      },
+      "Playlist": {
+        "required": [
+            "name",
+            "_id"
+        ],
+        "properties": {
+            "_id": {
+                "type": "string",
+                "uniqueItems": true
+            },
+              "description": {
+              "type": "string"
+            },
+              "name": {
+               "type": "string"
+            },
+            "songs": {
+                "type": "array",
+                "items":{
+                    "type": "object",
+                    "properties":{
+                        "_id":{
+                            "type":"string"
+                        },
+                        "name":{
+                            "type":"string"
+                        },
+                        "url":{
+                            "type":"string"
+                        }
+                    }
+                }
+            }
+        }
+      },
+      "Playlists":{
+          "type":"array",
+          "$ref": "#/definitions/Playlist"
+      }
+    }
+  }
